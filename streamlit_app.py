@@ -73,28 +73,8 @@ with tabs[3]:
     st.header("🗺️ Regenerative Policy Map")
     st.markdown("Explore land availability, community readiness, and regeneration potential across the U.S.")
 
-    # Example: Simple map centered on Oklahoma
-    st.pydeck_chart(pdk.Deck(
-        map_style='mapbox://styles/mapbox/light-v9',
-        initial_view_state=pdk.ViewState(
-            latitude=35.5,
-            longitude=-97.5,
-            zoom=5,
-            pitch=40,
-        ),
-        layers=[
-            pdk.Layer(
-                'HexagonLayer',
-                data=pd.DataFrame({"lat": [35.5], "lon": [-97.5]}),
-                get_position='[lon, lat]',
-                radius=50000,
-                elevation_scale=50,
-                elevation_range=[0, 1000],
-                pickable=True,
-                extruded=True,
-            )
-        ],
-    ))
+    # Display the uploaded image of redistributed population map
+    st.image("/mnt/data/US Map Resdistribution of Population.png", caption="Redistributed U.S. Living (2.5 Acres/Person Model)", use_column_width=True)
 
 # --- Downloads Tab ---
 with tabs[4]:
