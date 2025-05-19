@@ -74,12 +74,20 @@ with tabs[3]:
     st.header("🗺️ Regenerative Policy Map")
     st.markdown("Explore land availability, community readiness, and regeneration potential across the U.S.")
 
-    # Display the uploaded image of redistributed population map safely
+    # Corrected filename
+    image_path = "assets/US Map Resdistribution of Population.png"
+    alt_image_path = "assets/US Map Redistribution of Population.png"
+
     try:
-        image = Image.open("assets/US Map Resdistribution of Population.png")
+        if os.path.exists(image_path):
+            image = Image.open(image_path)
+        elif os.path.exists(alt_image_path):
+            image = Image.open(alt_image_path)
+        else:
+            raise FileNotFoundError
         st.image(image, caption="Redistributed U.S. Living (2.5 Acres/Person Model)", use_column_width=True)
-    except Exception as e:
-        st.warning("Map image could not be loaded. Please ensure it's in the /assets folder.")
+    except Exception:
+        st.warning("Map image could not be loaded. Please ensure it's in the /assets folder and named correctly.")
 
 # --- Downloads Tab ---
 with tabs[4]:
