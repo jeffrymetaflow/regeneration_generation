@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import os
 
 st.set_page_config("Regeneration Generation", layout="wide")
 
@@ -76,6 +77,24 @@ with tabs[3]:
 with tabs[4]:
     st.header("📥 Downloads")
     st.markdown("Download toolkits, charters, and presentation decks to share or present.")
-    st.download_button("📄 Download Policy Toolkit PDF", data=open("Policy_Toolkit.pdf", "rb").read(), file_name="PolicyToolkit.pdf")
-    st.download_button("📄 Download UN Proposal PDF", data=open("UN_proposal.pdf", "rb").read(), file_name="UNResolution.pdf")
-    st.download_button("📄 Download 30-Year Charter", data=open("30_year_charter.pdf", "rb").read(), file_name="30YearCharter.pdf")
+
+    toolkit_path = "assets/Policy_Toolkit.pdf"
+    if os.path.exists(toolkit_path):
+        with open(toolkit_path, "rb") as f:
+            st.download_button("📄 Download Policy Toolkit", data=f.read(), file_name="Policy_Toolkit.pdf")
+    else:
+        st.warning("Policy Toolkit not found.")
+
+    un_path = "assets/UN Proposal.pdf"
+    if os.path.exists(un_path):
+        with open(un_path, "rb") as f:
+            st.download_button("📄 Download UN Proposal", data=f.read(), file_name="UN_Proposal.pdf")
+    else:
+        st.warning("UN Proposal not found.")
+
+    charter_path = "assets/30 Year Charter.pdf"
+    if os.path.exists(charter_path):
+        with open(charter_path, "rb") as f:
+            st.download_button("📄 Download 30-Year Movement Charter", data=f.read(), file_name="30_Year_Charter.pdf")
+    else:
+        st.warning("30-Year Charter not found.")
