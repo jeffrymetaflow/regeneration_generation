@@ -76,6 +76,6 @@ with tabs[3]:
 with tabs[4]:
     st.header("📥 Downloads")
     st.markdown("Download toolkits, charters, and presentation decks to share or present.")
-    st.download_button("📄 Download Policy Toolkit PDF", data=open("policy_toolkit.pdf", "rb").read(), file_name="PolicyToolkit.pdf")
+    st.download_button("📄 Download Policy Toolkit PDF", data=open("Policy_Toolkit.pdf", "rb").read(), file_name="PolicyToolkit.pdf")
     st.download_button("📄 Download UN Proposal PDF", data=open("un_resolution.pdf", "rb").read(), file_name="UNResolution.pdf")
     st.download_button("📄 Download 30-Year Charter", data=open("30_year_charter.pdf", "rb").read(), file_name="30YearCharter.pdf")
