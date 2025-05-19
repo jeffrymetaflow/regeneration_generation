@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import os
 import pydeck as pdk
+from PIL import Image
 
 st.set_page_config("Regeneration Generation", layout="wide")
 
@@ -73,8 +74,12 @@ with tabs[3]:
     st.header("🗺️ Regenerative Policy Map")
     st.markdown("Explore land availability, community readiness, and regeneration potential across the U.S.")
 
-    # Display the uploaded image of redistributed population map
-    st.image("/mnt/data/US Map Resdistribution of Population.png", caption="Redistributed U.S. Living (2.5 Acres/Person Model)", use_column_width=True)
+    # Display the uploaded image of redistributed population map safely
+    try:
+        image = Image.open("assets/US Map Resdistribution of Population.png")
+        st.image(image, caption="Redistributed U.S. Living (2.5 Acres/Person Model)", use_column_width=True)
+    except Exception as e:
+        st.warning("Map image could not be loaded. Please ensure it's in the /assets folder.")
 
 # --- Downloads Tab ---
 with tabs[4]:
