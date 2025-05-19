@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import os
+import pydeck as pdk
 
 st.set_page_config("Regeneration Generation", layout="wide")
 
@@ -12,7 +13,7 @@ Use it to explore the movement, simulate impact, and help grow the future.
 """)
 
 # Tabs for sections
-tabs = st.tabs(["🌍 Vision", "📊 Impact Simulator", "📚 Education Campaign", "🗺️ Policy Map (Coming Soon)", "📥 Downloads"])
+tabs = st.tabs(["🌍 Vision", "📊 Impact Simulator", "📚 Education Campaign", "🗺️ Policy Map", "📥 Downloads"])
 
 # --- Vision Tab ---
 with tabs[0]:
@@ -67,11 +68,33 @@ with tabs[2]:
 
     st.info("Toolkits include storybooks, garden starter kits, soil science wheels, and parent guides.")
 
-# --- Map Placeholder ---
+# --- Map Tab ---
 with tabs[3]:
-    st.header("🗺️ Regenerative Policy Map (Coming Soon)")
-    st.markdown("Map-based exploration of land availability, town readiness, and regenerative funding zones.")
-    st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Oklahoma_county_map.png/800px-Oklahoma_county_map.png")
+    st.header("🗺️ Regenerative Policy Map")
+    st.markdown("Explore land availability, community readiness, and regeneration potential across the U.S.")
+
+    # Example: Simple map centered on Oklahoma
+    st.pydeck_chart(pdk.Deck(
+        map_style='mapbox://styles/mapbox/light-v9',
+        initial_view_state=pdk.ViewState(
+            latitude=35.5,
+            longitude=-97.5,
+            zoom=5,
+            pitch=40,
+        ),
+        layers=[
+            pdk.Layer(
+                'HexagonLayer',
+                data=pd.DataFrame({"lat": [35.5], "lon": [-97.5]}),
+                get_position='[lon, lat]',
+                radius=50000,
+                elevation_scale=50,
+                elevation_range=[0, 1000],
+                pickable=True,
+                extruded=True,
+            )
+        ],
+    ))
 
 # --- Downloads Tab ---
 with tabs[4]:
